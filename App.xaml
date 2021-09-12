@@ -1,0 +1,9 @@
+﻿<Application x:Class="TaskSchedule_Cont1.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:TaskSchedule_Cont1"
+             StartupUri="\view\TaskView.xaml">
+    <Application.Resources>
+         
+    </Application.Resources>
+</Application>

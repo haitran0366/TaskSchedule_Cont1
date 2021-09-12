@@ -1,0 +1,61 @@
+﻿<Window x:Class="TaskSchedule_Cont1.View.TaskView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TaskSchedule_Cont1.View" 
+        xmlns:vm="clr-namespace:TaskSchedule_Cont1.ViewModel"
+        mc:Ignorable="d"
+        Title="TaskView" Height="450" Width="800">
+    <Window.DataContext>
+        <vm:TaskViewModel/>
+    </Window.DataContext>
+    <Grid Background="#008080">
+        <StackPanel Margin="10">
+            <StackPanel>
+                <TextBlock Margin="0,10,0,0" Text="WPF – MVVM - Database (SQLite) – Add, Delete, Update Items from Listview" HorizontalAlignment="Center" FontSize="20" Foreground="YellowGreen" FontWeight="Bold" Height="50" Width="753"/>
+                <Button Content="Add a task" Height="30" Command="{Binding cmdAddaTask}" HorizontalAlignment="Right" Margin="10"  Name="cmdAddaTask" VerticalAlignment="Top" Width="150" />
+            </StackPanel>
+            <StackPanel Visibility="{Binding IsAddTask}">
+                <StackPanel>
+                    <TextBlock Text="Task Name:" Foreground="GreenYellow"/>
+                    <TextBox Text="{Binding TaskName,UpdateSourceTrigger=PropertyChanged}" Height="32"/>
+                </StackPanel>
+
+                <StackPanel>
+                    <TextBlock Text="Description:" Foreground="GreenYellow"/>
+                    <TextBox Text="{Binding Description , UpdateSourceTrigger=PropertyChanged}" Height="32"/>
+                </StackPanel>
+                <StackPanel>
+                    <TextBlock Text="DueDate:" Foreground="GreenYellow"/>
+                    <!--<TextBox Text="{Binding DueDate , UpdateSourceTrigger=PropertyChanged}" Height="32"/>-->
+                    <DatePicker x:Name="DueDate" SelectedDate="{Binding DueDate, Mode=TwoWay}" ></DatePicker>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="Save" Height="30" Command="{Binding cmdAddTask}" HorizontalAlignment="Right"  Name="cmdAddTask" Width="100" Margin="20" />
+                    <Button Content="Cancel" Height="30" Command="{Binding cmdCancelTask}" HorizontalAlignment="Right"  Name="cmdCancelTask" Width="100" />
+                </StackPanel>
+            </StackPanel>
+            <StackPanel>
+                <ListView ItemsSource="{Binding TaskList, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedTask, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <ListView.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Delete" Command="{Binding cmdDeleteItem}"/>
+                            <MenuItem Header="Update" Command="{Binding cmdUpdateItem}"/>
+                        </ContextMenu>
+                    </ListView.ContextMenu>
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Task Name" DisplayMemberBinding="{Binding TaskName}" />
+                            <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}" />
+                            <GridViewColumn Header="Due Date" DisplayMemberBinding="{Binding DueDate}"/>
+
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </StackPanel>
+
+        </StackPanel>
+
+    </Grid>
+</Window>
